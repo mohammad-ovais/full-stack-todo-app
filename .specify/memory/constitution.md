@@ -1,55 +1,64 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!-- SYNC IMPACT REPORT:
+Version change: N/A -> 1.0.0
+Modified principles: N/A (new constitution)
+Added sections: All sections
+Removed sections: None
+Templates requiring updates:
+- .specify/templates/plan-template.md ✅ updated
+- .specify/templates/spec-template.md ✅ updated
+- .specify/templates/tasks-template.md ✅ updated
+- .specify/templates/commands/*.md ✅ reviewed
+Follow-up TODOs: None
+-->
+# Multi-user Todo Web App Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Spec-Driven Development
+All development follows the Spec → Plan → Tasks → Code workflow. No manual code edits are allowed - only agent-generated code. Every feature must have clear specifications before implementation begins.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Separation of Concerns
+Frontend, backend, database, and authentication responsibilities must remain separate. Clear boundaries between services prevent tight coupling and enable independent development and scaling.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Security-First Architecture
+All APIs must be protected with JWT authentication. Every endpoint must verify user identity and enforce data ownership. No unauthorized access to user data is permitted.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. API Contract Consistency
+All API schemas, authentication rules, and data contracts must be consistent across services. Changes to shared schemas require coordinated updates across all affected components.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Data Integrity and Ownership
+All database operations must enforce user ownership. CRUD operations must filter data by authenticated user. The Task table must include user_id foreign key for proper data isolation.
 
-### [PRINCIPLE_6_NAME]
+### VI. Test-First Development (NON-NEGOTIABLE)
+All features must have tests written before implementation. Endpoints must be tested for authentication, authorization, and functionality. Both positive and negative test cases are required.
 
+## Technical Standards
 
-[PRINCIPLE__DESCRIPTION]
+### Authentication Requirements
+Better Auth must issue JWT tokens. FastAPI must verify JWT using the same BETTER_AUTH_SECRET. All API requests must include valid authentication headers.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### Database Standards
+SQLModel schema must be used consistently. Neon PostgreSQL is the designated database. All queries must filter by authenticated user to prevent unauthorized data access.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### API Design Standards
+Strict RESTful endpoints must be implemented: GET/POST /api/{user_id}/tasks, GET/PUT/DELETE /api/{user_id}/tasks/{id}, PATCH /api/{user_id}/tasks/{id}/complete. All endpoints must enforce user ownership validation.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### Frontend Standards
+Next.js App Router must be used. API client must attach JWT token to all requests. UI must be responsive and handle authentication state properly.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Development Workflow
+
+### Technology Stack Compliance
+Only stack-approved technologies are allowed: Next.js, FastAPI, SQLModel, Neon DB, Better Auth. No additional frameworks or libraries without explicit approval.
+
+### Task Requirements
+All tasks must include clear inputs, outputs, and acceptance criteria. Tasks must be testable and verifiable. Each task must contribute to one of the success criteria.
+
+### Code Quality Standards
+Smallest viable changes only. No refactoring of unrelated code. Code must follow established patterns. Proper error handling and validation required for all user inputs.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other development practices. All pull requests and reviews must verify compliance with these principles. Amendments require documentation, approval, and migration plan. All team members must acknowledge and follow these principles.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-01-30 | **Last Amended**: 2026-01-30

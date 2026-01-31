@@ -1,0 +1,24 @@
+{
+  "name": "@speculative/skill-neon-database-operations",
+  "version": "1.0.0",
+  "description": "Neon Serverless PostgreSQL connections and SQLModel queries with user data isolation",
+  "main": "index.mts",
+  "types": "index.d.ts",
+  "keywords": [
+    "skill",
+    "neon",
+    "postgresql",
+    "sqlmodel",
+    "database",
+    "connection-pooling",
+    "data-isolation"
+  ],
+  "author": "Speculative",
+  "license": "MIT",
+  "dependencies": {
+    "@speculative/skill": "^1.0.0",
+    "sqlalchemy": "^2.0.0",
+    "sqlmodel": "^0.0.8",
+    "fastapi": "^0.68.0"
+  }
+}

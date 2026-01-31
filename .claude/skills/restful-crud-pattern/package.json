@@ -1,0 +1,20 @@
+{
+  "name": "@speculative/skill-restful-crud-pattern",
+  "version": "1.0.0",
+  "description": "RESTful CRUD API Pattern Skill for todo tasks with JWT authentication",
+  "main": "index.mts",
+  "types": "index.d.ts",
+  "keywords": [
+    "skill",
+    "rest-api",
+    "crud",
+    "todo",
+    "authentication",
+    "jwt"
+  ],
+  "author": "Speculative",
+  "license": "MIT",
+  "dependencies": {
+    "@speculative/skill": "^1.0.0"
+  }
+}
