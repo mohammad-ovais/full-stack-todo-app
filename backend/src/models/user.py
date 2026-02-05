@@ -27,3 +27,5 @@ class UserCreate(UserBase):
 class UserUpdate(SQLModel):
     email: Optional[str] = None
     name: Optional[str] = None
+
+from .todo import Todo

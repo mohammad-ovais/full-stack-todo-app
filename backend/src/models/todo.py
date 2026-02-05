@@ -9,7 +9,7 @@ class TodoBase(SQLModel):
 
 class Todo(TodoBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    user_id: int = Field(foreign_key="users.id", nullable=False)
+    user_id: int = Field(foreign_key="user.id", nullable=False)
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
@@ -29,3 +29,5 @@ class TodoUpdate(SQLModel):
     title: Optional[str] = None
     description: Optional[str] = None
     completed: Optional[bool] = None
+    
+from .user import User

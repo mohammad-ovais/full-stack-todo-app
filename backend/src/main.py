@@ -2,6 +2,9 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from .database.database import engine
 from sqlmodel import SQLModel
+from .models.user import User
+from .models.todo import Todo
+
 
 # Import routers
 from .api.auth_routes import router as auth_router
