@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { Todo, TodoCreate, TodoUpdate } from '../../../shared/types/api';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
 
 // Create axios instance
 const api = axios.create({
