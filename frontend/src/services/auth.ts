@@ -11,9 +11,11 @@ const api = axios.create({
 
 // Add token to requests if available
 api.interceptors.request.use((config) => {
+  if (typeof window !== 'undefined') {
   const token = localStorage.getItem('access_token');
-  if (token) {
+   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
+   }
   }
   return config;
 });
@@ -49,17 +51,19 @@ export const loginUser = async (credentials: UserLogin): Promise<LoginResponse> 
 
 // Logout user
 export const logoutUser = (): void => {
+  if (typeof window === 'undefined') return;
   localStorage.removeItem('access_token');
 };
 
 // Check if user is authenticated
 export const isAuthenticated = (): boolean => {
-  const token = localStorage.getItem('access_token');
-  return !!token;
+  if (typeof window === 'undefined') return false;
+  return!! localStorage.getItem('access_token');
 };
 
 // Get current user ID from token (basic decoding, not for security purposes)
 export const getCurrentUserId = (): number | null => {
+  if (typeof window === 'undefined') return null;
   const token = localStorage.getItem('access_token');
   if (!token) return null;
 
