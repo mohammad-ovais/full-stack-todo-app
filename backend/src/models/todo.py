@@ -1,6 +1,9 @@
 from sqlmodel import SQLModel, Field, Relationship
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 from datetime import datetime
+
+if TYPE_CHECKING:
+    from .user import User
 
 class TodoBase(SQLModel):
     title: str = Field(nullable=False)
@@ -14,7 +17,7 @@ class Todo(TodoBase, table=True):
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
     # Relationship to user
-    user: "User" = Relationship(back_populates="todos")
+    user: Optional["User"] = Relationship(back_populates="todos")
 
 class TodoRead(TodoBase):
     id: int
@@ -29,5 +32,3 @@ class TodoUpdate(SQLModel):
     title: Optional[str] = None
     description: Optional[str] = None
     completed: Optional[bool] = None
-    
-from .user import User

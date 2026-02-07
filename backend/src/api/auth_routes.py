@@ -5,12 +5,21 @@ from ..database.database import get_session
 from ..models.user import UserCreate, User as UserModel
 from ..services.auth import create_user, authenticate_user, create_access_token_for_user
 from ..models.user import UserRead
+from ..utils.validation import validate_password_strength
 
 router = APIRouter()
 
 @router.post("/register", response_model=UserRead)
 def register(user: UserCreate, session: Session = Depends(get_session)):
     """Register a new user."""
+    # Validate password strength before creating user
+    is_valid, error_msg = validate_password_strength(user.password)
+    if not is_valid:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=error_msg
+        )
+
     try:
         db_user = create_user(session, user)
         return db_user

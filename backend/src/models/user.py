@@ -1,7 +1,9 @@
 from sqlmodel import SQLModel, Field, Relationship
-from typing import Optional, List
+from typing import Optional, List, TYPE_CHECKING
 from datetime import datetime
-import uuid
+
+if TYPE_CHECKING:
+    from .todo import Todo
 
 class UserBase(SQLModel):
     email: str = Field(unique=True, nullable=False)
@@ -14,7 +16,10 @@ class User(UserBase, table=True):
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
     # Relationship to todos
-    todos: List["Todo"] = Relationship(back_populates="user", sa_relationship_args={"cascade": "all, delete-orphan"})
+    todos: List["Todo"] = Relationship(
+        back_populates="user",
+        sa_relationship_kwargs={"cascade": "all, delete-orphan"}  # Correct key
+    )
 
 class UserRead(UserBase):
     id: int
@@ -22,10 +27,8 @@ class UserRead(UserBase):
     updated_at: datetime
 
 class UserCreate(UserBase):
-    password: str  # Plain text password for hashing
+    password: str
 
 class UserUpdate(SQLModel):
     email: Optional[str] = None
     name: Optional[str] = None
-
-from .todo import Todo
