@@ -20,10 +20,14 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+const authHeaders = { 'Content-Type': 'application/json' };
+
 // Register a new user
 export const registerUser = async (userData: UserCreate): Promise<AxiosResponse<any>> => {
   try {
-    const response = await axios.post(`${AUTH_BASE_URL}/register`, userData);
+    const response = await axios.post(`${AUTH_BASE_URL}/register`, userData, {
+      headers: authHeaders,
+    });
     return response;
   } catch (error) {
     throw error;
@@ -36,7 +40,7 @@ export const loginUser = async (credentials: UserLogin): Promise<LoginResponse> 
     const response = await axios.post(`${AUTH_BASE_URL}/login`, {
       email: credentials.email,
       password: credentials.password
-    });
+    }, { headers: authHeaders });
 
     // Store the token in localStorage
     if (response.data.access_token) {
