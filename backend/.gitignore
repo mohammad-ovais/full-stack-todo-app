@@ -1,0 +1,7 @@
+logs/
+tests/
+venv/
+.env
+performance_test.py
+__pycache__/
+*.pyc

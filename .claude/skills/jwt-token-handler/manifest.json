@@ -1,0 +1,19 @@
+{
+  "name": "jwt-token-handler",
+  "version": "1.0.0",
+  "description": "Handles JWT token operations in both Next.js and FastAPI applications",
+  "author": "Claude Code",
+  "license": "MIT",
+  "keywords": [
+    "jwt",
+    "authentication",
+    "authorization",
+    "nextjs",
+    "fastapi",
+    "better-auth",
+    "token-validation",
+    "middleware"
+  ],
+  "dependencies": [],
+  "entry_point": "skill.md"
+}
